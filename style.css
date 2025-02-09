@@ -1,0 +1,593 @@
+/* Reset and Basic Settings */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000; /* Black background */
+  color: #2ECC71; /* Slightly darker green for better contrast */
+  line-height: 1.6;
+}
+
+/* About Me Letter-by-Letter Animation */
+.animated-text {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+}
+
+/* Typography */
+h1, h2, h3, p, a {
+  color: #15b6ff;
+  text-shadow: 0 0 5px #bfbfff, 0 0 10px #ff6afc, 0 0 15px #ffdc00;
+}
+
+/* Navbar Styling */
+.navbar {
+  background-color: #111;
+  padding: 20px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar .container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  font-size: 1.8em;
+  color: #39FF14;
+}
+
+/* Navigation Links */
+.nav-links {
+  list-style: none;
+  display: flex;
+}
+
+.nav-links li {
+  margin-left: 20px;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color: #39FF14;
+  font-size: 1.1em;
+  transition: color 0.3s ease;
+}
+
+.nav-links li a:hover {
+  color: #2ECC71;
+}
+
+/* Hamburger Menu Button */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: #39FF14;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+/* Responsive Navbar Styles */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    background-color: #111;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    display: none;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .nav-links li {
+    margin: 10px 0;
+  }
+}
+
+/* Section Styling */
+.section {
+  padding: 100px 20px;
+  margin-top: 80px; /* Space for fixed navbar */
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.section h2 {
+  margin-bottom: 20px;
+  font-size: 2em;
+}
+
+/* Skills List Styling */
+.skills-list {
+  list-style: none;
+  font-size: 1.2em;
+  text-align: left;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.skills-list li {
+  margin-bottom: 10px;
+}
+
+/* Iframe Container Styling */
+.iframe-container {
+  margin: 20px 0;
+}
+
+.iframe-container iframe {
+  width: 100%;
+  height: 400px;
+  border: 2px solid #39FF14;
+}
+
+/* Footer Styling */
+footer {
+  background-color: #111;
+  color: #39FF14;
+  text-align: center;
+  padding: 40px 20px;
+  box-shadow: 0 0 20px #39FF14;
+}
+
+footer .container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+footer h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+footer a {
+  color: #39FF14;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: #2ECC71;
+}
+
+footer .social-links {
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+/* Skills Section Styling */
+.skill {
+  background-color: black;
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.skill h2 {
+  color: #39FF14;
+  text-shadow: 0 0 10px #39FF14;
+  margin-bottom: 20px;
+}
+
+/* Circular Progress Bar Styling */
+.progress-card {
+  display: inline-block;
+  margin: 20px;
+  padding: 20px;
+  background-color: #111;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #39FF14;
+  width: 200px;
+  max-width: 100%;
+  transition: transform 0.6s ease;
+}
+
+.progress-card:hover {
+  transform: scale(1.1);
+}
+
+.circular-progress {
+  position: relative;
+  height: 130px;
+  width: 130px;
+  border-radius: 50%;
+  background: conic-gradient(#39FF14 3.6deg, #222 0deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px #39FF14, 0 0 20px #39FF14;
+  margin: 0 auto;
+}
+
+.circular-progress::before {
+  content: "";
+  position: absolute;
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  background-color: black;
+}
+
+.progress-value {
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #39FF14;
+}
+
+.text {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #39FF14;
+  margin-top: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .progress-card {
+    width: 100%; /* Full width on mobile */
+    margin: 10px 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-card {
+    width: 90%;
+    margin: 10px auto;
+  }
+}
+
+/* WhatsApp Button Styling */
+.whatsapp-container {
+  margin: 20px 0;
+}
+
+.whatsapp-btn {
+  display: inline-block;
+  background-color: #25D366; /* WhatsApp green */
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.1em;
+  box-shadow: 0 0 10px #25D366;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.whatsapp-btn:hover {
+  background-color: #1ebe57;
+  box-shadow: 0 0 20px #25D366;
+}
+
+/* Email Button Styling */
+.email-container {
+  margin: 20px 0;
+}
+
+.email-btn {
+  display: inline-block;
+  background-color: #39FF14; /* Neon Green */
+  color: #000;
+  padding: 10px 20px;
+  border-radius: 5px;
+  text-decoration: none;
+  font-size: 1.1em;
+  box-shadow: 0 0 10px #39FF14;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.email-btn:hover {
+  background-color: #2ECC71;
+  box-shadow: 0 0 20px #39FF14;
+}
+
+/* Profile Picture Section */
+.profile-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.profile-pic-container {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.profile-pic {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #0077b5;
+}
+
+.circle-border {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  width: 220px;
+  height: 220px;
+  border: 2px dashed #0077b5;
+  border-radius: 50%;
+  animation: rotate 10s linear infinite;
+}
+
+/* Animations */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profile-pic-container {
+    width: 150px;
+    height: 150px;
+  }
+
+  .circle-border {
+    width: 170px;
+    height: 170px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-pic-container {
+    width: 120px;
+    height: 120px;
+  }
+
+  .circle-border {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* Scroll Progress Button */
+#progress {
+  position: fixed;
+  z-index: 1000;
+  bottom: 60px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  display: none;
+  place-items: center;
+  border-radius: 50%;
+  color: #1d002c;
+  cursor: pointer;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+              rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+              rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+}
+
+#progress-value {
+  display: grid;
+  height: calc(100% - 12px);
+  width: calc(100% - 12px);
+  background: var(--gradient-color-bg);
+  border-radius: 50%;
+  color: #fff;
+  place-items: center;
+  font-size: 25px;
+}
+
+/* Social Links style*/
+
+.social-links {
+    display: flex; /* Links ko horizontal layout mein rakhta hai */
+    gap: 25px; /* Links ke beech mein 15px space */
+    justify-content: center; /* Links ko center align karta hai (optional) */
+}
+
+.social-links a {
+    color: #000; /* Link ka default color */
+    font-size: 24px; /* Icon size */
+    text-decoration: none; /* Underline remove karta hai */
+    transition: color 0.3s ease; /* Smooth color transition on hover */
+}
+
+.social-links a:hover {
+    color: #0077b5; /* Hover color (aap ise change kar sakte hain) */
+}
+
+/* Color Variables */
+:root {
+  --bg-color: #e3edf7;
+  --gradient-white-bg: linear-gradient(0deg, #fff 0%, #edf4fa 51%, #e5eef7 100%);
+  --gradient-color-bg: linear-gradient(180deg, rgba(247, 1, 120, 1) 0%, rgba(160, 8, 156, 1) 51%, rgba(99, 13, 178, 1) 100%);
+  --main-color: #e6006d;
+  --font-color: #90979f;
+  --hover-box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+  --gradient-white-bg2: linear-gradient(98deg, #e5eef7 0%, #fff 100%);
+}
+
+
+/* logo */
+/* Styles for the header logo */
+.header-logo {
+  font-size: 1.8em;
+  font-family: Arial, sans-serif; /* Default font for testing */
+  z-index: 1000; /* Bring to front */
+  position: relative; /* Required for z-index */
+  text-transform: uppercase; /* Optional: Make text uppercase */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow */
+  display: inline-block; /* Ensure the logo behaves like an inline element */
+  color: #39FF14; /* Fallback color in case gradient doesn't work */
+}
+
+/* Gradient effect for the header logo text */
+.header-logo span {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient colors (adjust as needed) */
+  -webkit-background-clip: text; /* Clip the background to the text */
+  background-clip: text; /* Standard property for modern browsers */
+  color: transparent; /* Make the text transparent to show the gradient */
+}
+
+/* Styles for the navigation logo */
+.nav-logo {
+  font-size: 1.8em;
+  font-family: Arial, sans-serif; /* Default font for testing */
+  z-index: 1000; /* Bring to front */
+  position: relative; /* Required for z-index */
+  text-transform: uppercase; /* Optional: Make text uppercase */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add a shadow */
+  display: inline-block; /* Ensure the logo behaves like an inline element */
+  color: #39FF14; /* Fallback color in case gradient doesn't work */
+}
+
+.nav-logo span {
+  background: linear-gradient(90deg, #ff7e5f, #feb47b); /* Gradient colors (adjust as needed) */
+    --gradient-white-bg: text; /* Clip the background to the text */
+  background-clip: text; /* Standard property for modern browsers */
+  color: transparent; /* Make the text transparent to show the gradient */
+}
+
+/* Footer */
+/* Footer Styles */
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+footer .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+footer h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+/* Contact Info */
+.contact-info {
+    margin-bottom: 20px;
+}
+
+.contact-info p {
+    font-size: 16px;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-info i {
+    font-size: 18px;
+    color: #0077b5;
+}
+
+/* Social Links */
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.social-links a {
+    color: #fff;
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: #0077b5;
+}
+
+/* WhatsApp and Email Buttons */
+.whatsapp-container,
+.email-container {
+    margin: 10px 0;
+}
+
+.whatsapp-btn,
+.email-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 20px;
+    background-color: #0077b5;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.whatsapp-btn:hover,
+.email-btn:hover {
+    background-color: #005f8a;
+}
+
+.whatsapp-btn i,
+.email-btn i {
+    font-size: 20px;
+}
+
+/* Copyright */
+.copyright {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .social-links {
+        flex-wrap: wrap;
+    }
+
+    .whatsapp-btn,
+    .email-btn {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
