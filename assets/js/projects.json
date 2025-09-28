@@ -1,0 +1,92 @@
+[
+    {
+        "id": 1,
+        "title": "E-commerce Platform",
+        "category": "Web Development",
+        "image": "assets/images/exactus-mb_result.webp",
+        "description": "A modern e-commerce platform built with React and Node.js",
+        "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 2,
+        "title": "Corporate Website",
+        "category": "Web Design",
+        "image": "assets/images/getech_result.webp",
+        "description": "Professional corporate website with custom CMS",
+        "technologies": ["WordPress", "PHP", "MySQL", "CSS3"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 3,
+        "title": "Brand Identity Design",
+        "category": "Graphic Design",
+        "image": "assets/images/Grumium_result.webp",
+        "description": "Complete brand identity package for tech startup",
+        "technologies": ["Photoshop", "Illustrator", "Figma"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 4,
+        "title": "Mobile App UI",
+        "category": "UI/UX Design",
+        "image": "assets/images/Multitools_result.webp",
+        "description": "Modern mobile application user interface design",
+        "technologies": ["Figma", "Adobe XD", "Principle"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 5,
+        "title": "Restaurant Website",
+        "category": "Web Development",
+        "image": "assets/images/regalchips_result.webp",
+        "description": "Responsive restaurant website with online ordering",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 6,
+        "title": "CSS Framework",
+        "category": "Development",
+        "image": "assets/images/css-lab_result.webp",
+        "description": "Custom CSS framework for rapid prototyping",
+        "technologies": ["SCSS", "CSS3", "JavaScript", "Gulp"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    },
+    {
+        "id": 7,
+        "title": "Minerals Max",
+        "category": "Web Development",
+        "image": "assets/images/minrel_result.webp",
+        "description": "A professional corporate website for an industrial minerals supplier, featuring product catalogs and company information.",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
+        "liveUrl": "https://mineralsmax.com/",
+        "githubUrl": "#"
+    },
+    {
+        "id": 8,
+        "title": "TechPlus Engineering",
+        "category": "Web Development",
+        "image": "assets/images/design-brief_result.webp",
+        "description": "A clean and modern website for an engineering services company, showcasing their expertise and project portfolio.",
+        "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
+        "liveUrl": "https://techplus-engr.com/",
+        "githubUrl": "#"
+    },
+    {
+        "id": 9,
+        "title": "Design Brief",
+        "category": "Graphic Design",
+        "image": "assets/images/design-brief_result.webp",
+        "description": "A comprehensive design brief for a new mobile app, outlining project goals, target audience, and design requirements.",
+        "technologies": ["Figma", "Illustrator", "Photoshop"],
+        "liveUrl": "#",
+        "githubUrl": "#"
+    }
+]

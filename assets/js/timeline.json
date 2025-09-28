@@ -1,0 +1,27 @@
+[
+    {
+        "year": "2020",
+        "title": "Started Web Development",
+        "description": "Began learning HTML, CSS, and JavaScript fundamentals"
+    },
+    {
+        "year": "2021",
+        "title": "First Freelance Projects",
+        "description": "Started taking on small web development projects"
+    },
+    {
+        "year": "2022",
+        "title": "Full Stack Development",
+        "description": "Expanded skills to include backend technologies and databases"
+    },
+    {
+        "year": "2023",
+        "title": "Professional Certification",
+        "description": "Completed comprehensive web development bootcamp"
+    },
+    {
+        "year": "2024",
+        "title": "Established Business",
+        "description": "Founded Graphic Shop and expanded client base"
+    }
+]

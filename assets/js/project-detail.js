@@ -1,0 +1,1 @@
+// Placeholder script for a future dynamic project page rendering if needed.

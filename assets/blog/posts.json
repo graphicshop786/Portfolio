@@ -1,0 +1,16 @@
+[
+  {
+    "slug": "welcome",
+    "title": "Welcome to my blog",
+    "date": "2025-09-20",
+    "summary": "Why I started writing and what you can expect.",
+    "cover": "/assets/images/Bilal-Hussain_result.webp"
+  },
+  {
+    "slug": "portfolio-performance",
+    "title": "Optimizing Portfolio Performance",
+    "date": "2025-09-25",
+    "summary": "Lessons learned while tuning FCP/LCP/TBT on this site.",
+    "cover": "/assets/images/exactus-mb_result.webp"
+  }
+]

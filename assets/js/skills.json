@@ -1,0 +1,22 @@
+[
+    { "name": "HTML5", "category": "frontend", "level": 95, "icon": "fab fa-html5" },
+    { "name": "CSS3", "category": "frontend", "level": 90, "icon": "fab fa-css3-alt" },
+    { "name": "JavaScript", "category": "frontend", "level": 85, "icon": "fab fa-js-square" },
+    { "name": "React", "category": "frontend", "level": 80, "icon": "fab fa-react" },
+    { "name": "Vue.js", "category": "frontend", "level": 75, "icon": "fab fa-vuejs" },
+    { "name": "TailwindCSS", "category": "frontend", "level": 90, "icon": "fas fa-wind" },
+    { "name": "Node.js", "category": "backend", "level": 80, "icon": "fab fa-node-js" },
+    { "name": "PHP", "category": "backend", "level": 85, "icon": "fab fa-php" },
+    { "name": "Python", "category": "backend", "level": 75, "icon": "fab fa-python" },
+    { "name": "MySQL", "category": "backend", "level": 80, "icon": "fas fa-database" },
+    { "name": "MongoDB", "category": "backend", "level": 70, "icon": "fas fa-leaf" },
+    { "name": "WordPress", "category": "backend", "level": 95, "icon": "fab fa-wordpress" },
+    { "name": "Photoshop", "category": "design", "level": 90, "icon": "fas fa-image" },
+    { "name": "Illustrator", "category": "design", "level": 85, "icon": "fas fa-vector-square" },
+    { "name": "Figma", "category": "design", "level": 80, "icon": "fab fa-figma" },
+    { "name": "Adobe XD", "category": "design", "level": 75, "icon": "fab fa-adobe" },
+    { "name": "Git", "category": "tools", "level": 85, "icon": "fab fa-git-alt" },
+    { "name": "VS Code", "category": "tools", "level": 95, "icon": "fas fa-code" },
+    { "name": "Docker", "category": "tools", "level": 70, "icon": "fab fa-docker" },
+    { "name": "AWS", "category": "tools", "level": 65, "icon": "fab fa-aws" }
+]

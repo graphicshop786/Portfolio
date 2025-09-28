@@ -1,0 +1,17 @@
+{
+  "name": "finel-portfoio",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run build:css",
+    "build:css": "tailwindcss -i ./assets/css/input.css -o ./assets/css/styles.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  }
+}
