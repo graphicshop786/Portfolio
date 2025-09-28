@@ -11,20 +11,82 @@
   <meta property="og:type" content="website" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="stylesheet" href="/assets/css/styles.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-javascript.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-css.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-json.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-typescript.min.js" defer></script>
+  <style>
+    .prose {
+      max-width: 65ch;
+      margin: 0 auto;
+    }
+    .prose img {
+      margin: 2rem auto;
+      border-radius: 0.5rem;
+    }
+    .prose pre {
+      margin: 2rem 0;
+      padding: 1.5rem;
+      border-radius: 0.5rem;
+      background: rgba(0, 0, 0, 0.5);
+      overflow-x: auto;
+    }
+    .prose code {
+      font-size: 0.875rem;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    }
+  </style>
 </head>
 <body class="bg-primary-black text-white font-sans">
   <nav class="fixed top-0 left-0 right-0 z-50 bg-primary-black/80 backdrop-blur-glass border-b border-glass-gold">
     <div class="container mx-auto px-4 h-16 flex items-center justify-between">
-      <a href="/index.html" class="text-2xl font-futuristic font-bold text-accent-gold">BH</a>
-      <a href="/index.html#contact" class="text-white hover:text-accent-gold">Contact</a>
+      <div class="flex items-center space-x-6">
+        <a href="/index.html" class="text-2xl font-futuristic font-bold text-accent-gold">BH</a>
+        <a href="/blog.html" class="text-white hover:text-accent-gold font-medium">Blog</a>
+        <a href="/index.html#projects" class="text-white hover:text-accent-gold">Projects</a>
+        <a href="/index.html#contact" class="text-white hover:text-accent-gold">Contact</a>
+      </div>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="https://twitter.com/yourusername" target="_blank" rel="noopener" class="text-white hover:text-accent-gold">
+          <span class="sr-only">Twitter</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+        </a>
+        <a href="https://github.com/yourusername" target="_blank" rel="noopener" class="text-white hover:text-accent-gold">
+          <span class="sr-only">GitHub</span>
+          <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+      </div>
     </div>
   </nav>
 
   <main class="pt-20 container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-    <h1 class="text-3xl sm:text-4xl font-futuristic font-bold text-accent-gold mb-8">Blog</h1>
+    <header class="mb-12">
+      <h1 class="text-3xl sm:text-4xl font-futuristic font-bold text-accent-gold mb-4">Web Development Blog</h1>
+      <p class="text-gray-300 mb-8">Exploring modern web development techniques, best practices, and experiences.</p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 mb-8">
+        <div class="relative flex-1">
+          <input type="text" id="search" placeholder="Search articles..." 
+                 class="w-full px-4 py-2 bg-glass-white/10 border border-glass-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-gold text-white placeholder-gray-400">
+        </div>
+        <div class="flex-shrink-0">
+          <label for="category-filter" class="sr-only">Filter by category</label>
+          <select id="category-filter" aria-label="Filter by category" class="px-4 py-2 bg-glass-white/10 border border-glass-gold rounded-lg focus:outline-none focus:ring-2 focus:ring-accent-gold text-white">
+            <option value="">All Categories</option>
+            <option value="javascript">JavaScript</option>
+            <option value="css">CSS</option>
+            <option value="html">HTML</option>
+            <option value="performance">Performance</option>
+            <option value="tutorials">Tutorials</option>
+          </select>
+        </div>
+      </div>
+    </header>
 
     <div id="blog-list" class="space-y-6"></div>
-    <article id="blog-post" class="hidden"></article>
+    <article id="blog-post" class="hidden prose prose-invert max-w-none"></article>
   </main>
 
   <script src="/assets/js/blog.js" defer></script>

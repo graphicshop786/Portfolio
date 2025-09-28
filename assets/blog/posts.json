@@ -1,16 +1,42 @@
 [
   {
-    "slug": "welcome",
-    "title": "Welcome to my blog",
-    "date": "2025-09-20",
-    "summary": "Why I started writing and what you can expect.",
-    "cover": "/assets/images/Bilal-Hussain_result.webp"
+    "slug": "why-good-design-matters",
+    "title": "Why Good Design Matters for Your Business",
+    "date": "2025-09-29",
+    "summary": "Learn how good design can transform your business website and attract more customers, with real examples and practical tips.",
+    "cover": "/assets/images/design-brief_result.webp",
+    "category": "design",
+    "tags": ["web-design", "business", "user-experience"],
+    "readingTime": 6
+  },
+  {
+    "slug": "must-have-website-features",
+    "title": "5 Must-Have Features for Your Business Website in 2025",
+    "date": "2025-09-29",
+    "summary": "Discover the essential features your business website needs to succeed in 2025, based on real client success stories.",
+    "cover": "/assets/images/css-lab_result.webp",
+    "category": "web-development",
+    "tags": ["business", "website-features", "client-tips"],
+    "readingTime": 7
+  },
+  {
+    "slug": "modern-css-techniques",
+    "title": "Modern CSS Techniques for Better Responsive Designs",
+    "date": "2025-09-28",
+    "summary": "Exploring modern CSS features like Container Queries, CSS Grid, and Custom Properties for building flexible layouts.",
+    "cover": "/assets/images/css-lab_result.webp",
+    "category": "css",
+    "tags": ["css", "responsive-design", "tutorials"],
+    "readingTime": 12
   },
   {
     "slug": "portfolio-performance",
-    "title": "Optimizing Portfolio Performance",
+    "title": "Optimizing Portfolio Performance: A Deep Dive",
     "date": "2025-09-25",
-    "summary": "Lessons learned while tuning FCP/LCP/TBT on this site.",
-    "cover": "/assets/images/exactus-mb_result.webp"
+    "summary": "A technical exploration of web performance optimization techniques used to improve Core Web Vitals on this portfolio site.",
+    "cover": "/assets/images/exactus-mb_result.webp",
+    "category": "performance",
+    "tags": ["performance", "web-vitals", "optimization"],
+    "readingTime": 8
   }
 ]
