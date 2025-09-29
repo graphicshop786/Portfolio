@@ -1,42 +1,52 @@
 [
   {
-    "slug": "why-good-design-matters",
-    "title": "Why Good Design Matters for Your Business",
-    "date": "2025-09-29",
-    "summary": "Learn how good design can transform your business website and attract more customers, with real examples and practical tips.",
-    "cover": "/assets/images/design-brief_result.webp",
-    "category": "design",
-    "tags": ["web-design", "business", "user-experience"],
-    "readingTime": 6
+    "slug": "welcome",
+    "title": "Welcome to my Blog",
+    "summary": "A short introduction to my new blog.",
+    "cover": "/assets/images/blog/welcome.webp",
+    "date": "2024-03-10",
+    "readingTime": 2,
+    "category": "general",
+    "tags": ["welcome", "intro"]
   },
   {
     "slug": "must-have-website-features",
-    "title": "5 Must-Have Features for Your Business Website in 2025",
-    "date": "2025-09-29",
-    "summary": "Discover the essential features your business website needs to succeed in 2025, based on real client success stories.",
-    "cover": "/assets/images/css-lab_result.webp",
+    "title": "10 Must-Have Features for a Modern Website",
+    "summary": "In today’s digital landscape, a website is more than just an online brochure. It’s a powerful tool for engaging customers, driving sales, and building a brand. To stand out from the competition, your website needs to be equipped with modern features that meet the expectations of today’s users.",
+    "cover": "/assets/images/blog/must-have-website-features.webp",
+    "date": "2024-03-12",
+    "readingTime": 8,
     "category": "web-development",
-    "tags": ["business", "website-features", "client-tips"],
-    "readingTime": 7
+    "tags": ["website", "features", "modern"]
   },
   {
-    "slug": "modern-css-techniques",
-    "title": "Modern CSS Techniques for Better Responsive Designs",
-    "date": "2025-09-28",
-    "summary": "Exploring modern CSS features like Container Queries, CSS Grid, and Custom Properties for building flexible layouts.",
-    "cover": "/assets/images/css-lab_result.webp",
-    "category": "css",
-    "tags": ["css", "responsive-design", "tutorials"],
-    "readingTime": 12
+    "slug": "why-good-design-matters",
+    "title": "Why Good Design Matters for Your Business",
+    "summary": "In the competitive world of business, first impressions are everything. And more often than not, your website is the first point of contact a potential customer has with your brand. That’s why good design is not just a luxury—it’s a necessity.",
+    "cover": "/assets/images/blog/why-good-design-matters.webp",
+    "date": "2024-03-15",
+    "readingTime": 5,
+    "category": "design",
+    "tags": ["design", "business", "branding"]
   },
   {
     "slug": "portfolio-performance",
-    "title": "Optimizing Portfolio Performance: A Deep Dive",
-    "date": "2025-09-25",
-    "summary": "A technical exploration of web performance optimization techniques used to improve Core Web Vitals on this portfolio site.",
-    "cover": "/assets/images/exactus-mb_result.webp",
+    "title": "Boosting Portfolio Performance: A Case Study",
+    "summary": "In this post, I'll walk you through the steps I took to optimize my portfolio website for performance. From image optimization to code splitting, I'll share the techniques that helped me achieve a blazing-fast user experience.",
+    "cover": "/assets/images/blog/portfolio-performance.webp",
+    "date": "2024-03-20",
+    "readingTime": 10,
     "category": "performance",
-    "tags": ["performance", "web-vitals", "optimization"],
-    "readingTime": 8
+    "tags": ["performance", "optimization", "case-study"]
+  },
+  {
+    "slug": "modern-css-techniques",
+    "title": "Exploring Modern CSS Techniques",
+    "summary": "CSS has come a long way in recent years. With the introduction of features like Flexbox, Grid, and Custom Properties, developers now have more power and flexibility than ever before. In this post, we'll explore some of the most exciting modern CSS techniques that can help you create stunning and responsive layouts.",
+    "cover": "/assets/images/blog/modern-css-techniques.webp",
+    "date": "2024-03-25",
+    "readingTime": 12,
+    "category": "css",
+    "tags": ["css", "modern", "techniques"]
   }
 ]

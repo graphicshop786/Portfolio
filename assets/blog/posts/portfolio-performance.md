@@ -1,17 +1,19 @@
-# Optimizing Portfolio Performance
+## Boosting Portfolio Performance: A Case Study
 
-Core Web Vitals are essential for great UX and SEO. Here are a few wins I applied on this site:
+In this post, I'll walk you through the steps I took to optimize my portfolio website for performance. From image optimization to code splitting, I'll share the techniques that helped me achieve a blazing-fast user experience.
 
-## Fonts
+### Image Optimization
 
-Use `preconnect` and `preload` patterns to reduce blocking. Consider self-hosting if stable.
+Images are often the biggest culprits when it comes to slow-loading websites. I used a combination of techniques to optimize my images, including:
 
-## Images
+*   **Choosing the right format:** I used WebP for my images, which provides a smaller file size than JPEG or PNG without sacrificing quality.
+*   **Compressing images:** I used a tool to compress my images before uploading them to my website.
+*   **Lazy loading:** I used lazy loading to defer the loading of images that are not in the viewport.
 
-Add `sizes` and provide responsive `srcset` when possible. Prefer AVIF/WebP.
+### Code Splitting
 
-## JavaScript
+Code splitting is a technique that allows you to split your JavaScript code into smaller chunks, which can be loaded on demand. This can significantly improve the initial loading speed of your website.
 
-Defer non-critical work with `requestIdleCallback` and mark scroll listeners as `passive`.
+### Caching
 
-Happy optimizing!
+Caching is a technique that allows you to store frequently accessed data in a temporary storage location. This can help to reduce the number of requests to your server and improve the overall performance of your website.

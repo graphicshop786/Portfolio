@@ -1,209 +1,274 @@
 // Simple blog renderer for blog.html
 (async function () {
+  // Initialize mobile menu functionality
+  const mobileMenu = document.getElementById('mobile-menu');
+  const openMenuBtn = document.getElementById('open-menu');
+  const closeMenuBtn = document.getElementById('close-menu');
+  
+  openMenuBtn?.addEventListener('click', () => {
+    mobileMenu.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  });
+  
+  closeMenuBtn?.addEventListener('click', () => {
+    mobileMenu.classList.add('hidden');
+    document.body.style.overflow = '';
+  });
+
+  // Header scroll behavior
+  const header = document.getElementById('main-header');
+  let lastScroll = 0;
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll <= 0) {
+      header.classList.remove('scroll-up');
+      return;
+    }
+    
+    if (currentScroll > lastScroll && !header.classList.contains('scroll-down')) {
+      header.classList.remove('scroll-up');
+      header.classList.add('scroll-down');
+    } else if (currentScroll < lastScroll && header.classList.contains('scroll-down')) {
+      header.classList.remove('scroll-down');
+      header.classList.add('scroll-up');
+    }
+    
+    lastScroll = currentScroll;
+  });
+
+  // Blog functionality
   const params = new URLSearchParams(location.search);
   const slug = params.get('slug');
-  const listEl = document.getElementById('blog-list');
-  const postEl = document.getElementById('blog-post');
+  const postsSection = document.getElementById('posts-section');
+  const gridEl = document.getElementById('blog-grid');
+  const loadingEl = document.getElementById('loading-state');
+  const emptyEl = document.getElementById('empty-state');
   const searchInput = document.getElementById('search');
   const categoryFilter = document.getElementById('category-filter');
+  const postEl = document.getElementById('blog-post');
 
-  let posts = await fetch('/assets/blog/posts.json').then(r => r.json()).catch(() => []);
-  let filteredPosts = [...posts];
+  let posts = [];
+
+  const fetchPosts = async () => {
+    try {
+      const response = await fetch('/assets/blog/posts.json');
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      posts = await response.json();
+    } catch (error) {
+      console.error('Error loading blog posts:', error);
+      if (loadingEl) loadingEl.classList.add('hidden');
+      if (postsSection) {
+        postsSection.innerHTML = `<div class="text-center py-16">
+          <i class="ri-error-warning-line text-6xl text-red-500 mb-4"></i>
+          <h3 class="text-xl text-white mb-2">Failed to load posts</h3>
+          <p class="text-gray-400">Please check your connection or try again later.</p>
+        </div>`;
+      }
+    }
+  };
 
   const filterPosts = () => {
     const searchTerm = searchInput.value.toLowerCase();
     const category = categoryFilter.value;
     
-    filteredPosts = posts.filter(post => {
+    const filteredPosts = posts.filter(post => {
       const matchesSearch = post.title.toLowerCase().includes(searchTerm) || 
                           post.summary.toLowerCase().includes(searchTerm);
       const matchesCategory = !category || post.category === category;
       return matchesSearch && matchesCategory;
     });
     
-    renderList();
+    renderList(filteredPosts);
   };
 
-  searchInput.addEventListener('input', filterPosts);
-  categoryFilter.addEventListener('change', filterPosts);
-
-  const renderList = () => {
-    postEl.classList.add('hidden');
-    listEl.innerHTML = '';
-    filteredPosts.forEach(p => {
-      const card = document.createElement('a');
-      card.href = `/blog.html?slug=${encodeURIComponent(p.slug)}`;
-      card.className = 'block glass-card bg-glass-white backdrop-blur-glass border border-glass-gold rounded-2xl p-6 hover:bg-glass-gold transition-all duration-300';
-      card.innerHTML = `
-        <div class="flex flex-col sm:flex-row gap-4">
-          <img src="${p.cover}" alt="${p.title}" class="w-full sm:w-48 h-32 object-cover rounded-2xl" loading="lazy" width="192" height="128">
-          <div class="flex-1">
-            <h2 class="text-xl font-semibold text-white mb-2">${p.title}</h2>
-            <div class="flex items-center gap-4 text-sm text-light-gold mb-3">
-              <time datetime="${p.date}">${new Date(p.date).toLocaleDateString()}</time>
-              ${p.category ? `<span class="px-2 py-1 bg-glass-white/10 rounded-full">${p.category}</span>` : ''}
-              ${p.readingTime ? `<span>${p.readingTime} min read</span>` : ''}
-            </div>
-            <p class="text-gray-300 mb-3">${p.summary}</p>
-            <div class="flex flex-wrap gap-2">
-              ${(p.tags || []).map(tag => `
-                <span class="text-sm px-2 py-1 bg-glass-white/5 text-accent-gold rounded-full">#${tag}</span>
-              `).join('')}
-            </div>
-          </div>
-        </div>
-      `;
-      listEl.appendChild(card);
-    });
-  };
-
-  const markdownToHtml = (md) => {
-    const escape = (s) => s.replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const renderList = (postsToRender) => {
+    if (!gridEl) return;
     
-    // Function to handle code blocks with syntax highlighting
-    const formatCodeBlock = (code, lang = '') => {
-      const escaped = escape(code.trim());
-      return `
-        <pre class="relative bg-primary-black/90 rounded-lg p-4 mb-6 overflow-x-auto">
-          ${lang ? `<span class="absolute top-2 right-2 text-sm text-gray-500">${lang}</span>` : ''}
-          <code class="language-${lang} text-sm font-mono text-gray-300">${escaped}</code>
-        </pre>
-      `;
-    };
-
-    // Split content into blocks while preserving code blocks
-    const blocks = [];
-    let isInCodeBlock = false;
-    let currentBlock = [];
-    let codeLanguage = '';
-
-    md.split('\n').forEach(line => {
-      if (line.startsWith('```')) {
-        if (isInCodeBlock) {
-          blocks.push({ type: 'code', content: currentBlock.join('\n'), language: codeLanguage });
-          currentBlock = [];
-          isInCodeBlock = false;
-          codeLanguage = '';
-        } else {
-          if (currentBlock.length) {
-            blocks.push({ type: 'text', content: currentBlock.join('\n') });
-            currentBlock = [];
-          }
-          isInCodeBlock = true;
-          codeLanguage = line.slice(3).trim();
-        }
-      } else {
-        currentBlock.push(line);
-      }
+    gridEl.innerHTML = '';
+    
+    if (postsToRender.length === 0) {
+      emptyEl?.classList.remove('hidden');
+    } else {
+      emptyEl?.classList.add('hidden');
+    }
+    
+    postsToRender.forEach((post, index) => {
+      const template = document.getElementById('blog-post-template');
+      const card = template.content.cloneNode(true).querySelector('article');
+      const link = card.querySelector('a');
+      const img = card.querySelector('img');
+      const dateEl = card.querySelector('.date');
+      const readingTimeEl = card.querySelector('.reading-time');
+      const titleEl = card.querySelector('h2');
+      const summaryEl = card.querySelector('p');
+      const categoryEl = card.querySelector('.category');
+      const tagsContainer = card.querySelector('.flex.flex-wrap.gap-2:last-child');
+      
+      link.href = `/blog.html?slug=${encodeURIComponent(post.slug)}`;
+      img.src = post.cover;
+      img.alt = post.title;
+      card.querySelector('time').dateTime = post.date;
+      dateEl.textContent = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+      readingTimeEl.textContent = `${post.readingTime} min read`;
+      titleEl.textContent = post.title;
+      summaryEl.textContent = post.summary;
+      categoryEl.textContent = post.category;
+      
+      tagsContainer.innerHTML = ''; // Clear existing tags
+      post.tags?.forEach(tag => {
+        const tagEl = document.createElement('span');
+        tagEl.className = 'tag text-sm px-3 py-1 bg-glass-white/5 text-gray-300 rounded-full hover:text-accent-gold';
+        tagEl.textContent = `#${tag}`;
+        tagsContainer.appendChild(tagEl);
+      });
+      
+      card.setAttribute('data-aos', 'fade-up');
+      card.setAttribute('data-aos-delay', `${index * 100}`);
+      
+      gridEl.appendChild(card);
     });
 
-    if (currentBlock.length) {
-      blocks.push({ type: isInCodeBlock ? 'code' : 'text', content: currentBlock.join('\n') });
-    }
-
-    return blocks.map(block => {
-      if (block.type === 'code') {
-        return formatCodeBlock(block.content, block.language);
-      }
-
-      return block.content.split('\n\n').map(textBlock => {
-        // Headers
-        if (textBlock.startsWith('# ')) return `<h1 class="text-3xl font-bold text-accent-gold mb-6">${escape(textBlock.slice(2))}</h1>`;
-        if (textBlock.startsWith('## ')) return `<h2 class="text-2xl font-semibold text-accent-gold mb-4">${escape(textBlock.slice(3))}</h2>`;
-        if (textBlock.startsWith('### ')) return `<h3 class="text-xl font-semibold text-accent-gold mb-3">${escape(textBlock.slice(4))}</h3>`;
-        
-        // Blockquotes
-        if (textBlock.startsWith('> ')) {
-          return `<blockquote class="border-l-4 border-accent-gold pl-4 italic text-gray-300 mb-6">${
-            escape(textBlock.slice(2)).split('\n> ').join('<br>')
-          }</blockquote>`;
-        }
-
-        // Lists
-        if (textBlock.startsWith('- ')) {
-          const items = textBlock.split('\n').map(li => {
-            const content = escape(li.replace(/^\-\s*/, ''))
-              .replace(/`([^`]+)`/g, '<code class="bg-primary-black/80 px-1 rounded">$1</code>');
-            return `<li class="mb-2">${content}</li>`;
-          }).join('');
-          return `<ul class="list-disc pl-6 text-gray-300 mb-6">${items}</ul>`;
-        }
-
-        // Images with captions
-        if (textBlock.startsWith('![')) {
-          const match = textBlock.match(/!\[(.*?)\]\((.*?)\)(\{(.*?)\})?/);
-          if (match) {
-            const [_, alt, src, __, caption] = match;
-            return `
-              <figure class="mb-6">
-                <img src="${src}" alt="${escape(alt)}" class="rounded-lg w-full">
-                ${caption ? `<figcaption class="text-center text-sm text-gray-400 mt-2">${escape(caption)}</figcaption>` : ''}
-              </figure>
-            `;
-          }
-        }
-
-        // Regular paragraphs with inline code and links
-        return `<p class="text-gray-300 leading-relaxed mb-6">${
-          escape(textBlock)
-            .replace(/`([^`]+)`/g, '<code class="bg-primary-black/80 px-1 rounded">$1</code>')
-            .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" class="text-accent-gold hover:text-light-gold underline">$1</a>')
-        }</p>`;
-      }).join('\n');
-    }).join('\n');
+    AOS.refresh();
   };
 
   const renderPost = async (slug) => {
-    const meta = posts.find(p => p.slug === slug);
-    const mdUrl = `/assets/blog/posts/${slug}.md`;
-    const md = await fetch(mdUrl).then(r => r.text()).catch(() => '# Not found');
-    listEl.classList.add('hidden');
-    postEl.classList.remove('hidden');
-    postEl.innerHTML = `
-      <header class="mb-8">
-        <h1 class="text-3xl sm:text-4xl font-futuristic font-bold text-accent-gold mb-4">${meta?.title || slug}</h1>
-        <div class="flex flex-wrap items-center gap-4 text-sm text-light-gold mb-6">
-          <time datetime="${meta?.date}">${meta ? new Date(meta.date).toLocaleDateString() : ''}</time>
-          ${meta?.category ? `<span class="px-2 py-1 bg-glass-white/10 rounded-full">${meta.category}</span>` : ''}
-          ${meta?.readingTime ? `<span>${meta.readingTime} min read</span>` : ''}
-        </div>
-        ${meta?.tags?.length ? `
-          <div class="flex flex-wrap gap-2 mb-6">
-            ${meta.tags.map(tag => `
-              <span class="text-sm px-2 py-1 bg-glass-white/5 text-accent-gold rounded-full">#${tag}</span>
-            `).join('')}
-          </div>
-        ` : ''}
-        ${meta?.cover ? `<img src="${meta.cover}" alt="${meta.title}" class="w-full h-auto rounded-2xl mb-6" loading="lazy" />` : ''}
-      </header>
-      <div class="prose">${markdownToHtml(md)}</div>
-      <footer class="mt-12 pt-6 border-t border-glass-gold">
-        <div class="flex justify-between items-center">
-          <a href="/blog.html" class="text-accent-gold hover:text-light-gold">← Back to list</a>
-          <div class="flex space-x-4">
-            <button onclick="share('twitter')" class="text-white hover:text-accent-gold" aria-label="Share on Twitter">
-              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-            </button>
-            <button onclick="share('linkedin')" class="text-white hover:text-accent-gold" aria-label="Share on LinkedIn">
-              <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </button>
-          </div>
-        </div>
-      </footer>
-    `;
-  };
+    if (posts.length === 0) await fetchPosts();
 
-  // Initialize PrismJS after rendering markdown content
-  const initPrism = () => {
-    if (window.Prism) {
-      window.Prism.highlightAll();
+    const meta = posts.find(p => p.slug === slug);
+    
+    if (!meta) {
+      document.title = 'Post Not Found – Bilal Hussain';
+      if (postsSection) postsSection.classList.add('hidden');
+      if (postEl) {
+        postEl.classList.remove('hidden');
+        postEl.innerHTML = `
+          <div class="text-center py-16 max-w-4xl mx-auto">
+            <i class="ri-file-search-line text-6xl text-gray-600 mb-4"></i>
+            <h1 class="text-4xl font-bold text-accent-gold mb-4">Post Not Found</h1>
+            <p class="text-gray-400 mb-8">The post you are looking for does not exist.</p>
+            <a href="/blog.html" class="inline-flex items-center text-accent-gold hover:text-light-gold group">
+              <svg class="w-5 h-5 mr-2 transform group-hover:-translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+              </svg>
+              Back to Articles
+            </a>
+          </div>`;
+      }
+      return;
+    }
+
+    document.title = `${meta.title} – Bilal Hussain`;
+    const mdUrl = `/assets/blog/posts/${slug}.md`;
+
+    try {
+      const response = await fetch(mdUrl);
+      if (!response.ok) throw new Error('Markdown file not found');
+      const md = await response.text();
+
+      if (postsSection) postsSection.classList.add('hidden');
+      if (postEl) {
+        postEl.classList.remove('hidden');
+        postEl.innerHTML = `
+          <div class="max-w-4xl mx-auto" data-aos="fade-up">
+            <a href="/blog.html" class="inline-flex items-center text-accent-gold hover:text-light-gold mb-8 group">
+              <i class="ri-arrow-left-line mr-2 transform group-hover:-translate-x-1 transition-transform"></i>
+              Back to Articles
+            </a>
+
+            <header class="mb-12">
+              <h1 class="text-4xl sm:text-5xl font-futuristic font-bold text-accent-gold mb-6 leading-tight">${meta.title}</h1>
+              <div class="flex flex-wrap items-center gap-x-6 gap-y-4 text-light-gold mb-8">
+                <div class="flex items-center gap-2">
+                  <i class="ri-calendar-event-line"></i>
+                  <time datetime="${meta.date}">${new Date(meta.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-time-line"></i>
+                  <span>${meta.readingTime} min read</span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <i class="ri-folder-2-line"></i>
+                  <span>${meta.category}</span>
+                </div>
+              </div>
+              ${meta.tags?.length ? `
+                <div class="flex flex-wrap gap-2 mb-8">
+                  ${meta.tags.map(tag => `<span class="tag text-sm px-3 py-1 bg-glass-white/5 text-gray-300 rounded-full">#${tag}</span>`).join('')}
+                </div>
+              ` : ''}
+              ${meta.cover ? `
+                <div class="relative rounded-2xl overflow-hidden mb-12 shadow-lg">
+                  <img src="${meta.cover}" alt="${meta.title}" class="w-full h-auto" loading="lazy" />
+                </div>
+              ` : ''}
+            </header>
+
+            <div class="prose prose-invert max-w-none">
+              ${marked.parse(md)}
+            </div>
+
+            <footer class="mt-16 pt-8 border-t border-glass-gold" data-aos="fade-up">
+              <div class="flex flex-col sm:flex-row justify-between items-center gap-6">
+                <div class="flex items-center gap-4">
+                  <img src="/assets/images/Bilal-Hussain_result.webp" alt="Author" class="w-12 h-12 rounded-full">
+                  <div>
+                    <h3 class="font-medium text-white">Bilal Hussain</h3>
+                    <p class="text-sm text-gray-400">Web Developer & Designer</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-4">
+                  <button onclick="share('twitter')" class="social-share-btn" aria-label="Share on Twitter">
+                    <i class="ri-twitter-x-line"></i>
+                    <span>Share on Twitter</span>
+                  </button>
+                  <button onclick="share('linkedin')" class="social-share-btn" aria-label="Share on LinkedIn">
+                    <i class="ri-linkedin-line"></i>
+                    <span>Share on LinkedIn</span>
+                  </button>
+                </div>
+              </div>
+            </footer>
+          </div>
+        `;
+      }
+      AOS.refresh();
+      initPrism();
+    } catch (error) {
+      console.error('Error rendering post:', error);
+      // Show a generic error message if post rendering fails
     }
   };
 
-  // Share functionality
+  const initPrism = () => {
+    if (window.Prism) {
+      window.Prism.highlightAll();
+      // Add copy to clipboard buttons
+      const pres = document.querySelectorAll('pre');
+      pres.forEach(pre => {
+        const copyButton = document.createElement('button');
+        copyButton.className = 'copy-to-clipboard';
+        copyButton.innerHTML = '<i class="ri-file-copy-line"></i>';
+        copyButton.addEventListener('click', () => {
+          const code = pre.querySelector('code').innerText;
+          navigator.clipboard.writeText(code).then(() => {
+            copyButton.innerHTML = '<i class="ri-check-line"></i>';
+            setTimeout(() => {
+              copyButton.innerHTML = '<i class="ri-file-copy-line"></i>';
+            }, 2000);
+          });
+        });
+        pre.appendChild(copyButton);
+      });
+    }
+  };
+
   window.share = (platform) => {
     const meta = posts.find(p => p.slug === slug);
-    const title = meta?.title || 'Blog post';
+    const title = meta?.title || 'Check out this blog post';
     const url = window.location.href;
     
     const platforms = {
@@ -214,11 +279,26 @@
     window.open(platforms[platform], '_blank', 'noopener,noreferrer');
   };
 
-  if (slug) {
-    renderPost(slug);
-    // Initialize syntax highlighting after post is rendered
-    setTimeout(initPrism, 100);
-  } else {
-    renderList();
-  }
+  const init = async () => {
+    AOS.init({
+      duration: 800,
+      once: true,
+      disable: 'mobile'
+    });
+
+    if (slug) {
+      await fetchPosts();
+      renderPost(slug);
+    } else {
+      postsSection?.classList.remove('hidden');
+      loadingEl?.classList.remove('hidden');
+      await fetchPosts();
+      loadingEl?.classList.add('hidden');
+      renderList(posts);
+      searchInput?.addEventListener('input', filterPosts);
+      categoryFilter?.addEventListener('change', filterPosts);
+    }
+  };
+
+  init();
 })();
