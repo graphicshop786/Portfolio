@@ -31,12 +31,12 @@
     },
     {
         "id": 4,
-        "title": "Mobile App UI",
-        "category": "UI/UX Design",
+        "title": "Free Tools for Everyone",
+        "category": "Tools",
         "image": "assets/images/Multitools_result.webp",
-        "description": "Modern mobile application user interface design",
-        "technologies": ["Figma", "Adobe XD", "Principle"],
-        "liveUrl": "#",
+        "description": "We provide free online tools to help you with various tasks. Our tools are easy to use and completely free. Whether you need to convert files, generate passwords, or perform calculations, we've got you covered.",
+        "technologies": ["HTML5", "TailwindCSS", "JavaScript (Vanilla JS)", "Netlify Hosting"],
+        "liveUrl": "https://multitoolsdev.netlify.app",
         "githubUrl": "#"
     },
     {
@@ -84,9 +84,9 @@
         "title": "Design Brief",
         "category": "Graphic Design",
         "image": "assets/images/design-brief_result.webp",
-        "description": "A comprehensive design brief for a new mobile app, outlining project goals, target audience, and design requirements.",
-        "technologies": ["Figma", "Illustrator", "Photoshop"],
-        "liveUrl": "#",
+        "description": "Unique briefs for logos, posters, and banners with detailed roadmaps.",
+        "technologies": ["HTML ", "CSS", "JavaScript"],
+        "liveUrl": "https://graphicshop786.github.io/design-brief-generator",
         "githubUrl": "#"
     }
 ]
