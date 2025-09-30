@@ -9,16 +9,7 @@
         "liveUrl": "https://exactus-mb.com",
         "githubUrl": "#"
     },
-    {
-        "id": 2,
-        "title": "Corporate Website",
-        "category": "Web Design",
-        "image": "assets/images/getech_result.webp",
-        "description": "Professional corporate website with custom CMS",
-        "technologies": ["WordPress", "PHP", "MySQL", "CSS3"],
-        "liveUrl": "#",
-        "githubUrl": "#"
-    },
+
     {
         "id": 3,
         "title": "Electronics Design Services",
@@ -66,7 +57,7 @@
         "image": "assets/images/minrel_result.webp",
         "description": "A professional corporate website for an industrial minerals supplier, featuring product catalogs and company information.",
         "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
-        "liveUrl": "https://mineralsmax.com/",
+        "liveUrl": "https://mineralsmax.com",
         "githubUrl": "#"
     },
     {
@@ -76,7 +67,7 @@
         "image": "assets/images/design-brief_result.webp",
         "description": "A clean and modern website for an engineering services company, showcasing their expertise and project portfolio.",
         "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
-        "liveUrl": "https://techplus-engr.com/",
+        "liveUrl": "https://techplus-engr.com",
         "githubUrl": "#"
     },
     {
