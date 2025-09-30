@@ -1,12 +1,12 @@
 [
     {
         "id": 1,
-        "title": "E-commerce Platform",
-        "category": "Web Development",
+        "title": "Great Medical Billing Services",
+        "category": "WordPress Development",
         "image": "assets/images/exactus-mb_result.webp",
-        "description": "A modern e-commerce platform built with React and Node.js",
-        "technologies": ["React", "Node.js", "MongoDB", "Stripe"],
-        "liveUrl": "#",
+        "description": "A modern e-commerce platform built with React and Node.jsStreamline your financial healthcare journey with our efficient medical billing services. From claims processing to insurance coordination, we ensure a seamless and accurate billing experience.",
+    "technologies": ["WordPress", "Elementor", "PHP", "MySQL"],
+        "liveUrl": "https://exactus-mb.com",
         "githubUrl": "#"
     },
     {
@@ -21,12 +21,12 @@
     },
     {
         "id": 3,
-        "title": "Brand Identity Design",
-        "category": "Graphic Design",
+        "title": "Electronics Design Services",
+        "category": "Custom Design",
         "image": "assets/images/Grumium_result.webp",
-        "description": "Complete brand identity package for tech startup",
-        "technologies": ["Photoshop", "Illustrator", "Figma"],
-        "liveUrl": "#",
+        "description": "Grumium Technologies to bring your innovative ideas to life with cutting-edge RF, PCB, and embedded system solutions",
+        "technologies": ["HTML5", "CSS3", "JavaScript"],
+        "liveUrl": "https://grumium-tech.com",
         "githubUrl": "#"
     },
     {
@@ -41,12 +41,12 @@
     },
     {
         "id": 5,
-        "title": "Restaurant Website",
-        "category": "Web Development",
+        "title": "Expert Solutions for RISC-V, RTL Design, and FPGA Emulation",
+        "category": "WordPress Development",
         "image": "assets/images/regalchips_result.webp",
         "description": "Responsive restaurant website with online ordering",
-        "technologies": ["HTML5", "CSS3", "JavaScript", "PHP"],
-        "liveUrl": "#",
+        "technologies": ["WordPress", "PHP", "MySQL", "CSS3"],
+        "liveUrl": "https://regalchips.com",
         "githubUrl": "#"
     },
     {
@@ -55,8 +55,8 @@
         "category": "Development",
         "image": "assets/images/css-lab_result.webp",
         "description": "Custom CSS framework for rapid prototyping",
-        "technologies": ["SCSS", "CSS3", "JavaScript", "Gulp"],
-        "liveUrl": "#",
+    "technologies": ["React", "TailwindCSS", "Vercel Hosting"],
+        "liveUrl": "https://graphicshop-css-lab.vercel.app",
         "githubUrl": "#"
     },
     {

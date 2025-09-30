@@ -1,4 +1,260 @@
-/* Blog Specific Styles */
+/* Blog Core Styles */
+.blog-content {
+  max-width: 75ch;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.75;
+}
+
+/* Typography */
+.blog-content h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  background: linear-gradient(45deg, var(--accent-gold), #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin: 2rem 0;
+  line-height: 1.2;
+}
+
+.blog-content h2 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  color: var(--accent-gold);
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+.blog-content h3 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  color: var(--light-gold);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+  color: #e5e7eb;
+}
+
+/* Code Blocks */
+.blog-content pre {
+  margin: 2rem -2rem;
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 1rem;
+  overflow-x: auto;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.blog-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.9em;
+}
+
+.blog-content :not(pre) > code {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+  font-size: 0.9em;
+  color: var(--accent-gold);
+}
+
+/* Lists */
+.blog-content ul, .blog-content ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+  color: #e5e7eb;
+}
+
+.blog-content li {
+  margin: 0.5rem 0;
+  padding-left: 0.5rem;
+}
+
+.blog-content ul > li {
+  list-style-type: disc;
+}
+
+.blog-content ol > li {
+  list-style-type: decimal;
+}
+
+/* Blockquotes */
+.blog-content blockquote {
+  margin: 2rem 0;
+  padding: 1.5rem 2rem;
+  border-left: 4px solid var(--accent-gold);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 0 1rem 1rem 0;
+  font-style: italic;
+  color: #d1d5db;
+}
+
+.blog-content blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Images */
+.blog-content img {
+  display: block;
+  max-width: 100%;
+  margin: 2.5rem auto;
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+}
+
+.blog-content img:hover {
+  transform: scale(1.02);
+}
+
+.blog-content figure {
+  margin: 2.5rem -2rem;
+}
+
+.blog-content figcaption {
+  text-align: center;
+  margin-top: 1rem;
+  color: #9ca3af;
+  font-size: 0.9em;
+  font-style: italic;
+}
+
+/* Links */
+.blog-content a {
+  color: var(--accent-gold);
+  text-decoration: underline;
+  text-decoration-thickness: 0.1em;
+  text-underline-offset: 0.2em;
+  transition: all 0.2s ease;
+}
+
+.blog-content a:hover {
+  color: var(--light-gold);
+  text-decoration-thickness: 0.2em;
+}
+
+/* Tables */
+.blog-content table {
+  width: 100%;
+  margin: 2rem 0;
+  border-collapse: collapse;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.blog-content th {
+  background: rgba(255, 255, 255, 0.1);
+  font-weight: 600;
+  color: var(--accent-gold);
+}
+
+.blog-content th, .blog-content td {
+  padding: 1rem;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Highlighted Content */
+.blog-content mark {
+  background: rgba(255, 215, 0, 0.15);
+  color: var(--light-gold);
+  padding: 0.2em 0.4em;
+  border-radius: 0.3em;
+}
+
+/* Custom Components */
+.blog-content .note {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  border-radius: 1rem;
+}
+
+.blog-content .warning {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.2);
+  border-radius: 1rem;
+}
+
+.blog-content .tip {
+  margin: 2rem 0;
+  padding: 1.5rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: 1rem;
+}
+
+/* Code Syntax Highlighting */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #6b7280;
+}
+
+.token.punctuation {
+  color: #9ca3af;
+}
+
+.token.property,
+.token.keyword {
+  color: #93c5fd;
+}
+
+.token.string {
+  color: #6ee7b7;
+}
+
+.token.operator,
+.token.boolean,
+.token.number {
+  color: #fcd34d;
+}
+
+.token.selector,
+.token.attr-name,
+.token.attr-value {
+  color: #d8b4fe;
+}
+
+.token.function {
+  color: #60a5fa;
+}
+
+.token.class-name {
+  color: #f472b6;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .blog-content {
+    padding: 0 1rem;
+  }
+
+  .blog-content pre {
+    margin: 2rem -1rem;
+    padding: 1.5rem;
+    font-size: 0.9em;
+  }
+
+  .blog-content figure {
+    margin: 2rem -1rem;
+  }
+
+  .blog-content blockquote {
+    margin: 2rem -1rem;
+    padding: 1rem 1.5rem;
+  }
+}
 :root {
   --accent-gold: #FFD700;
   --light-gold: #FFECB3;

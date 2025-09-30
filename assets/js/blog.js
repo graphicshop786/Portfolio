@@ -280,10 +280,13 @@
   };
 
   const init = async () => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      disable: 'mobile'
+    // Defer AOS initialization until window 'load' so stylesheets and fonts are applied
+    // This avoids forcing a synchronous layout during script execution which can
+    // cause the console warning "Layout was forced before the page was fully loaded".
+    window.addEventListener('load', () => {
+      if (window.AOS && typeof window.AOS.init === 'function') {
+        window.AOS.init({ duration: 800, once: true, disable: 'mobile' });
+      }
     });
 
     if (slug) {

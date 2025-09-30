@@ -1,11 +1,26 @@
 // Main JavaScript for Portfolio Interactions
 class PortfolioApp {
     constructor() {
-        this.init().catch(error => console.error("Initialization failed:", error));
+        this.init().catch(error => {
+            console.error("Initialization failed:", error);
+            try {
+                // Remove preloader if present so error overlay is visible
+                const pre = document.getElementById('preloader');
+                if (pre && pre.parentNode) {
+                    pre.remove();
+                }
+            } catch (e) {}
+            // Dispatch a custom event to surface the error in the page overlay
+            window.dispatchEvent(new CustomEvent('app-init-error', { detail: error && (error.message || error.toString()) }));
+        });
         this.observer = null; // To be shared between methods
     }
 
     async init() {
+        // Import the testimonials module
+        const { updateTestimonials } = await import('./testimonials.js');
+        this.updateTestimonials = updateTestimonials;
+
         // Fetch all data in parallel for performance
         const [timelineData, skillsData, projectsData, testimonialsData] = await Promise.all([
             this.fetchData('timeline.json'),
@@ -39,7 +54,8 @@ class PortfolioApp {
 
     async fetchData(fileName) {
         try {
-            const response = await fetch(`./assets/js/${fileName}`);
+            // Use absolute path so module-relative resolution doesn't cause double paths
+            const response = await fetch(`/assets/js/${fileName}`);
             if (!response.ok) throw new Error(`Failed to fetch ${fileName}`);
             return response.json();
         } catch (error) {
@@ -582,37 +598,10 @@ class PortfolioApp {
     }
 
     // Testimonials Scroller
-    setupTestimonials(testimonialsData) {
-        const track = document.getElementById('testimonials-track');
-        if (!track || !testimonialsData) return;
-
-        // Duplicate the data for a seamless loop
-        const allTestimonials = [...testimonialsData, ...testimonialsData];
-
-        allTestimonials.forEach(t => {
-            const card = document.createElement('div');
-            card.className = 'flex-shrink-0 w-full sm:w-1/2 lg:w-1/3 p-4';
-            const initials = (t.name || '?').split(' ').map(s=>s[0]).slice(0,2).join('').toUpperCase();
-            const stars = Array.from({length: (t.rating || 5)}).map(()=>'<i class="fas fa-star"></i>').join('');
-            card.innerHTML = `
-                <div class="testimonial-card glass-card bg-glass-white backdrop-blur-glass border border-glass-gold rounded-2xl p-6 h-full flex flex-col hover-glow">
-                    <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-full avatar-circle flex items-center justify-center bg-accent-gold/20 border border-accent-gold/30 text-accent-gold font-semibold">${initials}</div>
-                        <div>
-                            <p class="font-bold text-white leading-tight">${t.name}</p>
-                            <p class="text-sm text-light-gold leading-tight">${t.company}${t.location ? ` • 🇵🇰 ${t.location}` : ''}</p>
-                        </div>
-                    </div>
-                    <p class="text-gray-300 italic mb-4 flex-grow">"${t.quote}"</p>
-                    <div class="flex items-center stars text-accent-gold">${stars}</div>
-                </div>
-            `;
-            track.appendChild(card);
-        });
-
-        track.classList.add('animate-scroll-left');
+    setupTestimonials(testimonials) {
+        if (!testimonials || !testimonials.length) return;
+        this.updateTestimonials(testimonials);
     }
-
     // Chat-style Contact Form
     setupContactForm() {
         const chatContainer = document.getElementById('chat-container');
@@ -620,6 +609,43 @@ class PortfolioApp {
         const sendBtn = document.getElementById('send-btn');
         
         if (!chatContainer || !chatInput || !sendBtn) return;
+
+        // Helper to detect a real-looking sitekey (avoid template placeholders like {{...}})
+        const getHcaptchaSitekey = () => {
+            const el = document.querySelector('.h-captcha');
+            const sk = el ? (el.getAttribute('data-sitekey') || '').trim() : '';
+            return sk || null;
+        };
+
+        const hasValidHcaptchaSitekey = () => {
+            const sk = getHcaptchaSitekey();
+            if (!sk) return false;
+            // Reject obvious template tokens
+            if (sk.includes('{{') || sk.includes('}}') || sk.includes(' ')) return false;
+            // Accept alphanumeric-ish keys of reasonable length
+            return /^[A-Za-z0-9\-\_]{20,}$/.test(sk);
+        };
+
+        const loadHcaptchaIfNeeded = () => {
+            if (!hasValidHcaptchaSitekey()) return Promise.resolve(false);
+            // If script already loaded, resolve true
+            if (window.hcaptcha) return Promise.resolve(true);
+
+            return new Promise((resolve) => {
+                const script = document.createElement('script');
+                script.src = 'https://hcaptcha.com/1/api.js?onload=hcaptchaOnLoad&render=explicit';
+                script.async = true;
+                script.defer = true;
+                // Provide a global onload to be safe
+                window.hcaptchaOnLoad = () => {
+                    resolve(true);
+                };
+                script.addEventListener('error', () => resolve(false));
+                document.head.appendChild(script);
+                // Safety timeout
+                setTimeout(() => resolve(!!window.hcaptcha), 3000);
+            });
+        };
 
         let currentStep = -1; // Start at -1, will be incremented to 0
         const formData = {};
@@ -681,7 +707,8 @@ class PortfolioApp {
                 }
             } else if (currentStep === chatSteps.length) {
                 // This is the step after the last question
-                this.submitFormData(formData);
+                // Ensure hCaptcha is loaded only if needed, then submit
+                loadHcaptchaIfNeeded().then(() => this.submitFormData(formData));
             } else {
                 // This case should not be reached, but as a fallback:
                 chatInput.disabled = true;
@@ -694,13 +721,17 @@ class PortfolioApp {
             netlifyData.append('form-name', 'contact');
             Object.keys(data).forEach(key => netlifyData.append(key, data[key]));
 
-            // Attach hCaptcha token if present
-            const token = window.hcaptcha ? window.hcaptcha.getResponse() : '';
-            if (!token) {
-                addMessage("Please complete the captcha to continue.");
-                return;
+            // If a valid hCaptcha sitekey exists, require token; otherwise proceed without captcha
+            if (hasValidHcaptchaSitekey()) {
+                const token = window.hcaptcha ? window.hcaptcha.getResponse() : '';
+                if (!token) {
+                    addMessage("Please complete the captcha to continue.");
+                    return;
+                }
+                netlifyData.append('h-captcha-response', token);
+            } else {
+                // No captcha configured for this environment — proceed without token
             }
-            netlifyData.append('h-captcha-response', token);
 
             fetch('/', {
                 method: 'POST',

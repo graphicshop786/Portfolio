@@ -1,13 +1,48 @@
 [
     {
-        "quote": "Bilal is a true professional. He delivered a high-quality website on time and was incredibly responsive to feedback. Highly recommended!",
-        "name": "John Doe",
-        "company": "Tech Solutions Inc."
+        "quote": "Bilal transformed our e-commerce platform with his exceptional development skills. The website's performance improved dramatically, and our sales increased by 40% within three months!",
+        "name": "Ahmad Khan",
+        "company": "TechVentures Pakistan",
+        "role": "CEO",
+        "image": "/assets/images/testimonials/ahmad-khan.webp",
+        "project": "E-commerce Platform Development",
+        "location": "Lahore, Pakistan"
     },
     {
-        "quote": "The branding and design work exceeded all our expectations. The attention to detail was phenomenal. We'll definitely work with him again.",
-        "name": "Jane Smith",
-        "company": "Creative Minds Co."
+        "quote": "Working with Bilal was an absolute pleasure. His expertise in modern web technologies and attention to detail resulted in a beautiful, high-performing website that perfectly represents our brand.",
+        "name": "Fatima Siddiqui",
+        "company": "DesignHub",
+        "role": "Creative Director",
+        "image": "/assets/images/testimonials/fatima-siddiqui.webp",
+        "project": "Brand Website Redesign",
+        "location": "Karachi, Pakistan"
+    },
+    {
+        "quote": "Bilal's technical skills and problem-solving abilities are outstanding. He revamped our entire web application, improving load times by 60% and implementing robust security measures.",
+        "name": "Muhammad Hassan",
+        "company": "FinTech Solutions",
+        "role": "CTO",
+        "image": "/assets/images/testimonials/muhammad-hassan.webp",
+        "project": "Financial Platform Optimization",
+        "location": "Islamabad, Pakistan"
+    },
+    {
+        "quote": "The custom e-learning platform Bilal developed for us exceeded all expectations. His understanding of user experience and technical requirements was invaluable.",
+        "name": "Sarah Ahmed",
+        "company": "EduTech Pakistan",
+        "role": "Product Manager",
+        "image": "/assets/images/testimonials/sarah-ahmed.webp",
+        "project": "E-Learning Platform Development",
+        "location": "Lahore, Pakistan"
+    },
+    {
+        "quote": "Exceptional work on our real estate platform! Bilal's implementation of advanced search features and virtual tour integration dramatically improved our user engagement.",
+        "name": "Zain Malik",
+        "company": "PropertyConnect",
+        "role": "Founder",
+        "image": "/assets/images/testimonials/zain-malik.webp",
+        "project": "Real Estate Platform Enhancement",
+        "location": "Karachi, Pakistan"
     },
     {
         "quote": "An expert in WordPress development. Bilal transformed our outdated site into a modern, fast, and easy-to-manage platform.",

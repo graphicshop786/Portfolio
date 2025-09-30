@@ -74,6 +74,7 @@
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/testimonials.css">
 </head>
 
 <body id="top" class="bg-primary-black text-white font-sans overflow-x-hidden" data-theme="dark">
@@ -349,11 +350,14 @@
         <!-- Testimonials Section -->
         <section id="testimonials" class="py-20 relative">
             <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-futuristic font-bold text-center text-accent-gold mb-16">
+                                <h2 class="text-4xl font-bold text-center mb-4 bg-gradient-to-r from-accent-gold to-light-gold bg-clip-text text-transparent">
                     What Clients Say
                 </h2>
+                <p class="text-center text-gray-400 mb-12 max-w-2xl mx-auto">
+                    Meet the visionaries and entrepreneurs who've experienced the transformative impact of our web development solutions.
+                </p>
                 <div id="testimonials-container" class="relative w-full overflow-hidden">
-                    <div id="testimonials-track" class="flex">
+                    <div id="testimonials-track" class="flex gap-6 transition-transform duration-500 ease-out">
                         <!-- Testimonials will be populated by JavaScript -->
                     </div>
                 </div>
@@ -455,7 +459,7 @@
                             <!-- Input area -->
                             <div class="flex space-x-3">
                                 <input type="text" id="chat-input" placeholder="Type your message..." class="flex-1 bg-glass-white backdrop-blur-glass border border-white/30 rounded-full px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:border-accent-gold transition-colors duration-300">
-                                <button type="button" id="send-btn" class="w-12 h-12 bg-accent-gold rounded-full flex items-center justify-center text-primary-black hover:bg-light-gold transition-colors duration-300">
+                                <button type="button" id="send-btn" title="Send message" class="w-12 h-12 bg-accent-gold rounded-full flex items-center justify-center text-primary-black hover:bg-light-gold transition-colors duration-300">
                                     <i class="fas fa-paper-plane"></i>
                                 </button>
                             </div>
@@ -467,7 +471,7 @@
     </main>
 
     <!-- Back to Top Button -->
-    <button id="back-to-top" class="fixed bottom-8 right-8 w-14 h-14 bg-accent-gold rounded-full flex items-center justify-center text-primary-black opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 z-50">
+    <button id="back-to-top" title="Back to top" class="fixed bottom-8 right-8 w-14 h-14 bg-accent-gold rounded-full flex items-center justify-center text-primary-black opacity-0 pointer-events-none transition-all duration-300 hover:scale-110 z-50">
         <i class="fas fa-arrow-up"></i>
         <svg class="absolute inset-0 w-14 h-14 transform -rotate-90" viewBox="0 0 56 56">
             <circle cx="28" cy="28" r="26" stroke="rgba(255,255,255,0.2)" stroke-width="2" fill="none"></circle>
@@ -488,7 +492,43 @@
     </div>
 
     <!-- Scripts -->
-    <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-    <script src="assets/js/main.js" defer></script>
+    <!-- hCaptcha script removed from static load to avoid CSP/403/noise during local development.
+        It will be loaded dynamically only when a valid sitekey is present. -->
+        <!-- Runtime error overlay for easier debugging (visible on page) -->
+        <script>
+            // Minimal overlay to show unhandled errors when developer tools aren't open
+            (function(){
+                const overlay = document.createElement('div');
+                overlay.id = 'runtime-error-overlay';
+                overlay.style.cssText = 'position:fixed;left:1rem;right:1rem;bottom:1rem;z-index:99999;background:rgba(0,0,0,0.85);color:#ffd700;padding:12px;border-radius:8px;font-family:monospace;display:none;max-height:40vh;overflow:auto;';
+                document.body.appendChild(overlay);
+
+                const show = (msg) => { overlay.style.display='block'; overlay.textContent = msg; };
+
+                window.addEventListener('error', (e) => {
+                    show(`Error: ${e.message} at ${e.filename}:${e.lineno}:${e.colno}`);
+                });
+                window.addEventListener('unhandledrejection', (e) => {
+                    show(`Promise Rejection: ${e.reason}`);
+                });
+                window.addEventListener('app-init-error', (e) => {
+                    show(`Init Error: ${e.detail || e}`);
+                });
+                // also show a short init message
+                show('Initializing... if this message persists the page failed to load scripts.');
+                // hide after 3s if no errors
+                setTimeout(()=>{ if (overlay.textContent === 'Initializing... if this message persists the page failed to load scripts.') overlay.style.display='none'; }, 3000);
+            })();
+        </script>
+                    <script>
+                        // Safety: remove preloader after 6s to avoid permanent loader if scripts hang
+                        setTimeout(() => {
+                            try {
+                                const pre = document.getElementById('preloader');
+                                if (pre && pre.parentNode) pre.remove();
+                            } catch (e) {}
+                        }, 6000);
+                    </script>
+        <script type="module" src="assets/js/main.js"></script>
 </body>
 </html>
