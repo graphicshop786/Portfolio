@@ -165,6 +165,18 @@ html,
   /* 7 */
 }
 
+/* Site helpers added by maintenance script */
+.empty-message {
+  color: #9ca3af;
+  padding: 1rem;
+  font-size: 0.95rem;
+}
+
+.progress-bar {
+  transition: width 1s ease-out;
+  width: 0%;
+}
+
 /*
 1. Remove the margin in all browsers.
 2. Inherit line-height from `html` so users can set them as a class directly on the `html` element.
@@ -349,6 +361,7 @@ input:where([type='button']),
 input:where([type='reset']),
 input:where([type='submit']) {
   -webkit-appearance: button;
+  appearance: button;
   /* 1 */
   background-color: transparent;
   /* 2 */

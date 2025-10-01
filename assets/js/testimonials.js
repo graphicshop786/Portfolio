@@ -36,7 +36,7 @@ function updateTestimonials(testimonials) {
 
     // If nothing rendered, show a helpful message
     if (!track.innerHTML.trim()) {
-        track.innerHTML = `<div style="color:#9ca3af;padding:1rem">No testimonials available right now.</div>`;
+        track.innerHTML = `<div class="empty-message">No testimonials available right now.</div>`;
         return;
     }
 
