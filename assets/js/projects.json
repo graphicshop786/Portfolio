@@ -11,7 +11,7 @@
     },
 
     {
-        "id": 3,
+        "id": 2,
         "title": "Electronics Design Services",
         "category": "Custom Design",
         "image": "assets/images/Grumium_result.webp",
@@ -21,7 +21,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 4,
+        "id": 3,
         "title": "Free Tools for Everyone",
         "category": "Tools",
         "image": "assets/images/Multitools_result.webp",
@@ -31,7 +31,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 5,
+        "id": 4,
         "title": "Expert Solutions for RISC-V, RTL Design, and FPGA Emulation",
         "category": "WordPress Development",
         "image": "assets/images/regalchips_result.webp",
@@ -41,7 +41,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 6,
+        "id": 5,
         "title": "CSS Framework",
         "category": "Development",
         "image": "assets/images/css-lab_result.webp",
@@ -51,7 +51,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 7,
+        "id": 6,
         "title": "Minerals Max",
         "category": "Web Development",
         "image": "assets/images/minrel_result.webp",
@@ -61,7 +61,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 8,
+        "id": 7,
         "title": "TechPlus Engineering",
         "category": "Web Development",
         "image": "assets/images/design-brief_result.webp",
@@ -71,7 +71,7 @@
         "githubUrl": "#"
     },
     {
-        "id": 9,
+        "id": 8,
         "title": "Design Brief",
         "category": "Graphic Design",
         "image": "assets/images/design-brief_result.webp",
