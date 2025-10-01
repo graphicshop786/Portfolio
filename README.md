@@ -30,6 +30,11 @@ python -m http.server 8000
 
 Then open `http://localhost:8000` in your browser.
 
+Live demo
+---------
+
+Visit the site online: https://graphicshop786.netlify.app
+
 Build and watch Tailwind CSS (optional)
 --------------------------------------
 
