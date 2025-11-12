@@ -173,7 +173,89 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* On small screens we want the track to stack vertically
+       so a single card is centered and looks like a column list. */
+    #testimonials-track {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 0;
+        overflow-x: visible; /* remove horizontal scroll on mobile */
+        align-items: center; /* center cards */
+    }
+
     .testimonial-card {
-        min-width: 280px;
+        /* Make cards full-width but keep a comfortable side gutter */
+        flex: 0 0 auto;
+        width: calc(100% - 2rem);
+        max-width: 720px;
+        min-width: 0;
+        margin: 0.25rem auto; /* center and small vertical spacing */
+    }
+
+    /* Hide snapping on mobile for natural vertical scroll */
+    #testimonials-track {
+        scroll-snap-type: none;
+    }
+}
+
+/* Container & scroll behavior for horizontal layout on larger screens */
+#testimonials-container {
+    width: 100%;
+    overflow: hidden;
+}
+
+#testimonials-track {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1rem;
+    -webkit-overflow-scrolling: touch;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+}
+
+.testimonial-card {
+    scroll-snap-align: start;
+    flex: 0 0 auto; /* default for larger screens */
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+    /* Tablet: slightly larger cards but still comfortable for horizontal scroll */
+    .testimonial-card {
+        flex: 0 0 60%;
+        max-width: 640px;
+        min-width: 320px;
+    }
+}
+
+@media (min-width: 1024px) {
+    /* Desktop: use compact cards, allow multiple cards in view */
+    .testimonial-card {
+        flex: 0 0 320px;
+        min-width: 300px;
+        max-width: 400px;
+    }
+    #testimonials-track {
+        gap: 2rem;
+        padding: 1.5rem 2rem;
+    }
+}
+
+/* Final mobile override to ensure cascade doesn't re-enable horizontal layout */
+@media (max-width: 768px) {
+    #testimonials-track {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1rem !important;
+        padding: 1rem 0 !important;
+        overflow-x: visible !important;
+        scroll-snap-type: none !important;
+        align-items: center !important;
+    }
+
+    .testimonial-card {
+        width: calc(100% - 2rem) !important;
+        max-width: 720px !important;
+        margin: 0.25rem auto !important;
     }
 }

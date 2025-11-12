@@ -68,7 +68,19 @@ function updateTestimonials(testimonials) {
         container.style.position = container.style.position || 'relative';
         container.appendChild(badge);
 
-        // Add navigation
+        // Respect mobile layout: if viewport is small, don't initialize horizontal slider controls
+        const isMobile = window.matchMedia('(max-width: 768px)').matches;
+        if (isMobile) {
+            // Ensure track uses vertical stacking and no transform
+            track.style.transform = '';
+            track.style.flexDirection = 'column';
+            track.style.overflowX = 'visible';
+            track.style.scrollSnapType = 'none';
+            // leave the debug badge and exit early — mobile will rely on CSS for layout
+            return;
+        }
+
+        // Add navigation (desktop/tablet slider)
         const nav = document.createElement('div');
         nav.className = 'testimonial-nav';
         nav.innerHTML = `
