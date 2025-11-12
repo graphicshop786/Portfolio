@@ -68,15 +68,48 @@ function updateTestimonials(testimonials) {
         container.style.position = container.style.position || 'relative';
         container.appendChild(badge);
 
-        // Respect mobile layout: if viewport is small, don't initialize horizontal slider controls
-        const isMobile = window.matchMedia('(max-width: 768px)').matches;
-        if (isMobile) {
-            // Ensure track uses vertical stacking and no transform
-            track.style.transform = '';
-            track.style.flexDirection = 'column';
-            track.style.overflowX = 'visible';
-            track.style.scrollSnapType = 'none';
-            // leave the debug badge and exit early — mobile will rely on CSS for layout
+        // Respect mobile layout: if viewport is small (by viewport OR by container width),
+        // don't initialize horizontal slider controls so CSS vertical stacking can take over.
+        // Instead of returning permanently, watch for viewport changes so we can
+        // re-initialize the slider when the user rotates or resizes to desktop.
+        const mq = window.matchMedia('(max-width: 820px)');
+        const isSmallContainer = containerWidth <= 480; // narrow column (e.g., mobile in narrow containers)
+
+        const applyMobileState = () => {
+            const isMobile = mq.matches || isSmallContainer;
+            if (isMobile) {
+                // Ensure track uses vertical stacking and no transform
+                track.style.transform = '';
+                track.style.flexDirection = 'column';
+                track.style.overflowX = 'visible';
+                track.style.scrollSnapType = 'none';
+                // Remove any desktop nav/indicators if present
+                const navEl = container.parentNode && container.parentNode.querySelector('.testimonial-nav');
+                if (navEl) navEl.remove();
+                const inds = container.parentNode && container.parentNode.querySelector('.testimonial-indicators');
+                if (inds) inds.remove();
+                return true;
+            }
+            return false;
+        };
+
+        // Apply mobile state now. If mobile, attach listeners to re-run layout when leaving mobile.
+        if (applyMobileState()) {
+            const handleChange = (e) => {
+                if (!e.matches) {
+                    // When user switches to desktop, re-run the layout to initialize slider
+                    requestAnimationFrame(setupLayout);
+                }
+            };
+            if (mq.addEventListener) mq.addEventListener('change', handleChange);
+            else mq.addListener(handleChange);
+
+            // Also add a resize fallback
+            window.addEventListener('resize', () => {
+                if (!mq.matches) requestAnimationFrame(setupLayout);
+            });
+
+            // Exit early — mobile will rely on CSS and the listeners above
             return;
         }
 

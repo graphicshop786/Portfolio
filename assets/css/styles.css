@@ -2033,6 +2033,58 @@ video {
   .tilt-animated { transition: none; }
 }
 
+/* Contact form (chat) layout improvements */
+/* Make the form a column so chat messages grow and input stays visible */
+#contact-form {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+#contact-form #chat-container {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  max-height: none; /* override utility class if present */
+  padding-right: 0.5rem;
+}
+
+#contact-form .flex.space-x-3 {
+  /* input row: keep at bottom */
+  flex: 0 0 auto;
+}
+
+/* On small screens, cap chat container height but allow it to grow relative to viewport */
+@media (max-width: 768px) {
+  #contact-form {
+    min-height: 320px;
+  }
+  #contact-form #chat-container {
+    max-height: 40vh;
+  }
+}
+
+/* Improve message bubble sizing and input row for small devices */
+.chat-message .bot-message,
+.chat-message .user-message,
+.chat-message .bot-message p,
+.chat-message .user-message p {
+  max-width: calc(100vw - 140px);
+}
+
+/* Ensure input row is visible above any floating buttons */
+#contact-form .flex.space-x-3 {
+  position: relative;
+  z-index: 30;
+}
+
+/* Reduce avatar size and spacing on small screens */
+@media (max-width: 480px) {
+  .testimonial-image { width: 3rem; height: 3rem; }
+  .testimonial-card { padding: 1rem; }
+  .chat-message .w-8 { width: 2rem; height: 2rem; }
+  .chat-message .max-w-xs { max-width: calc(100vw - 120px); }
+}
+
 @keyframes slideInMessage {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
