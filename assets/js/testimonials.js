@@ -60,13 +60,8 @@ function updateTestimonials(testimonials) {
         let currentIndex = 0;
         const totalSlides = Math.max(1, testimonials.length - cardsPerView + 1);
 
-        // Debug badge so we know the testimonials renderer ran
-        const badge = document.createElement('div');
-        badge.className = 'testimonials-debug-badge';
-        badge.style.cssText = 'position:absolute;top:0.75rem;right:0.75rem;background:rgba(0,0,0,0.6);color:#FFD700;padding:6px 8px;border-radius:6px;font-size:12px;z-index:20';
-        badge.textContent = `${testimonials.length} testimonials · view ${cardsPerView}`;
+        // Ensure positioned for any absolutely placed elements
         container.style.position = container.style.position || 'relative';
-        container.appendChild(badge);
 
         // Respect mobile layout: if viewport is small (by viewport OR by container width),
         // don't initialize horizontal slider controls so CSS vertical stacking can take over.
