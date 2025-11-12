@@ -268,3 +268,12 @@
         display: none !important;
     }
 }
+
+/* Ensure testimonial navigation is centered within the page/container */
+.testimonial-nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0 0 0;
+}

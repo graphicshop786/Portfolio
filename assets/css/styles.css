@@ -2060,6 +2060,20 @@ video {
   align-items: center;
 }
 
+/* Center input row contents (input + send button) and ensure input grows while button stays compact */
+#contact-form .flex.space-x-3 {
+  justify-content: center;
+}
+
+#chat-input {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+#send-btn {
+  flex: 0 0 auto;
+}
+
 /* Prevent flex children from overflowing their container (important for small screens) */
 #chat-input {
   min-width: 0;
