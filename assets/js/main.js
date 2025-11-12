@@ -465,7 +465,7 @@ class PortfolioApp {
                     <div class="project-overlay absolute inset-0 bg-primary-black/90 flex flex-col justify-center items-center opacity-0 group-hover:opacity-100 transition-all duration-300">
                         <h4 class="text-xl font-bold text-accent-gold mb-2">${project.title}</h4>
                         <p class="text-gray-300 text-center px-4 mb-4">${project.description}</p>
-                        <a class="bg-accent-gold text-primary-black px-6 py-2 rounded-full font-semibold hover:bg-light-gold transition-colors duration-300" href="/projects/${project.id}.html" aria-label="Open details for ${project.title}">
+                        <a class=\"bg-accent-gold text-primary-black px-6 py-2 rounded-full font-semibold hover:bg-light-gold transition-colors duration-300\" href=\"/projects/template.html?id=${project.id}\" aria-label=\"Open details for ${project.title}\">
                             View Details
                         </a>
                     </div>

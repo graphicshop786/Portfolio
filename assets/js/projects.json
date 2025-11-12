@@ -4,7 +4,7 @@
         "title": "Great Medical Billing Services",
         "category": "WordPress Development",
         "image": "assets/images/exactus-mb_result.webp",
-        "description": "A modern e-commerce platform built with React and Node.jsStreamline your financial healthcare journey with our efficient medical billing services. From claims processing to insurance coordination, we ensure a seamless and accurate billing experience.",
+"description": "A modern e-commerce platform built with React and Node.js. Streamline your financial healthcare journey with our efficient medical billing services. From claims processing to insurance coordination, we ensure a seamless and accurate billing experience.",
     "technologies": ["WordPress", "Elementor", "PHP", "MySQL"],
         "liveUrl": "https://exactus-mb.com",
         "githubUrl": "#"
@@ -76,7 +76,7 @@
         "category": "Graphic Design",
         "image": "assets/images/design-brief_result.webp",
         "description": "Unique briefs for logos, posters, and banners with detailed roadmaps.",
-        "technologies": ["HTML ", "CSS", "JavaScript"],
+"technologies": ["HTML", "CSS", "JavaScript"],
         "liveUrl": "https://graphicshop786.github.io/design-brief-generator",
         "githubUrl": "#"
     }

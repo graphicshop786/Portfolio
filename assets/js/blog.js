@@ -101,6 +101,10 @@
       const card = template.content.cloneNode(true).querySelector('article');
       const link = card.querySelector('a');
       const img = card.querySelector('img');
+      // Mobile-first image performance
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.sizes = '(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw';
       const dateEl = card.querySelector('.date');
       const readingTimeEl = card.querySelector('.reading-time');
       const titleEl = card.querySelector('h2');
@@ -111,6 +115,7 @@
       link.href = `/blog.html?slug=${encodeURIComponent(post.slug)}`;
       img.src = post.cover;
       img.alt = post.title;
+      img.onerror = () => { img.src = '/assets/images/placeholder-avatar.svg'; };
       card.querySelector('time').dateTime = post.date;
       dateEl.textContent = new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       readingTimeEl.textContent = `${post.readingTime} min read`;
@@ -132,7 +137,9 @@
       gridEl.appendChild(card);
     });
 
-    AOS.refresh();
+    if (window.AOS && typeof window.AOS.refresh === 'function') {
+      window.AOS.refresh();
+    }
   };
 
   const renderPost = async (slug) => {
@@ -235,7 +242,9 @@
           </div>
         `;
       }
-      AOS.refresh();
+      if (window.AOS && typeof window.AOS.refresh === 'function') {
+        window.AOS.refresh();
+      }
       initPrism();
     } catch (error) {
       console.error('Error rendering post:', error);

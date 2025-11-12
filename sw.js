@@ -27,14 +27,19 @@ self.addEventListener('fetch', (event) => {
   const req = event.request;
   const url = new URL(req.url);
 
+  // Don't cache non-GET requests
+  if (req.method !== 'GET') {
+    return;
+  }
+
   // Network-first for HTML navigation
   if (req.mode === 'navigate') {
     event.respondWith(
       fetch(req).then((res) => {
         const clone = res.clone();
-        caches.open('bh-portfolio-v1').then((cache) => cache.put(req, clone));
+        caches.open('bh-portfolio-v1').then((cache) => cache.put(req, clone)).catch(() => {});
         return res;
-      }).catch(() => caches.match(req).then((res) => res || caches.match('/index.html')))
+      }).catch(() => caches.match(req).then((res) => res || caches.match('/index.html')).catch(() => {}))
     );
     return;
   }
@@ -44,7 +49,7 @@ self.addEventListener('fetch', (event) => {
     event.respondWith(
       caches.match(req).then((cached) => cached || fetch(req).then((res) => {
         const clone = res.clone();
-        caches.open('bh-portfolio-v1').then((cache) => cache.put(req, clone));
+        caches.open('bh-portfolio-v1').then((cache) => cache.put(req, clone)).catch(() => {});
         return res;
       }))
     );

@@ -277,3 +277,10 @@
     align-items: center;
     margin: 1rem 0 0 0;
 }
+
+/* Extra-small screens polish */
+@media (max-width: 360px) {
+    .testimonial-card { padding: 1rem; }
+    .testimonial-name { font-size: 1rem; }
+    .testimonial-role, .testimonial-company, .testimonial-location { font-size: 0.8rem; }
+}

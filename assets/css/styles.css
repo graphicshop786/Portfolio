@@ -1960,6 +1960,19 @@ video {
   transform: scale(1);
 }
 
+/* Small-screen modal padding tweaks (mobile-first) */
+@media (max-width: 480px) {
+  #modal-content > .p-4 { padding: 0.75rem !important; }
+}
+
+/* XS tweaks for skills grid/cards */
+@media (max-width: 480px) {
+  #skills-grid { row-gap: 0.75rem; column-gap: 0.75rem; }
+  #skills-grid .skill-item { padding: 0.75rem !important; }
+  #skills-grid .skill-item i { font-size: 1.5rem !important; }
+  #skills-grid .skill-item h4 { font-size: 0.95rem !important; }
+}
+
 /* Performance: avoid rendering offscreen sections initially */
 #projects, #testimonials, #contact {
   content-visibility: auto;
