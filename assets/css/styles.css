@@ -2085,6 +2085,39 @@ video {
   .chat-message .max-w-xs { max-width: calc(100vw - 120px); }
 }
 
+/* Responsive tweaks for chat input and send button */
+@media (max-width: 640px) {
+  /* Stack input and button on very small screens */
+  #contact-form .flex.space-x-3 {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  #chat-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 9999px;
+  }
+
+  #send-btn {
+    width: 100%;
+    height: auto;
+    padding: 0.75rem;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Slightly smaller button on tablets */
+  #send-btn { width: 44px; height: 44px; }
+}
+
 @keyframes slideInMessage {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
