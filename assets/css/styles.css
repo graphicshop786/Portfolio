@@ -2038,7 +2038,10 @@ video {
 #contact-form {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  /* Don't force full height of parent; allow the card to size naturally */
+  height: auto;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 #contact-form #chat-container {
@@ -2049,8 +2052,26 @@ video {
 }
 
 #contact-form .flex.space-x-3 {
-  /* input row: keep at bottom */
+  /* input row: keep at bottom and constrained to card width */
   flex: 0 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Prevent flex children from overflowing their container (important for small screens) */
+#chat-input {
+  min-width: 0;
+  box-sizing: border-box;
+}
+#send-btn {
+  box-sizing: border-box;
+}
+
+/* Ensure glass-card containing the form clips visual overflow so inputs don't appear outside */
+.glass-card {
+  overflow: hidden;
 }
 
 /* On small screens, cap chat container height but allow it to grow relative to viewport */
