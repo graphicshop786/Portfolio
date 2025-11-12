@@ -205,6 +205,14 @@
     overflow: hidden;
 }
 
+/* On wide screens allow content to breathe outside container if needed */
+@media (min-width: 1024px) {
+    #testimonials-container { overflow: visible; }
+}
+
+/* Hide any leftover debug badges */
+.testimonials-debug-badge { display: none !important; }
+
 #testimonials-track {
     display: flex;
     gap: 1.5rem;

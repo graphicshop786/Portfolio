@@ -92,7 +92,7 @@ function updateTestimonials(testimonials) {
         if (applyMobileState()) {
             const handleChange = (e) => {
                 if (!e.matches) {
-                    // When user switches to desktop, re-run the layout to initialize slider
+                    // When user switches to desktop, re-run the layout to initialize layout
                     requestAnimationFrame(setupLayout);
                 }
             };
@@ -106,6 +106,21 @@ function updateTestimonials(testimonials) {
 
             // Exit early — mobile will rely on CSS and the listeners above
             return;
+        }
+
+        // Tablet/Desktop: use a clean grid instead of slider for better aesthetics on wide screens
+        const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+        const isTablet = !isDesktop && window.matchMedia('(min-width: 768px)').matches;
+        if (isDesktop || isTablet) {
+            track.style.transform = '';
+            track.style.flexDirection = '';
+            track.style.overflowX = 'visible';
+            track.style.scrollSnapType = 'none';
+            track.style.display = 'grid';
+            track.style.gridTemplateColumns = isDesktop ? 'repeat(3, minmax(300px, 1fr))' : 'repeat(2, minmax(300px, 1fr))';
+            track.style.gap = isDesktop ? '2rem' : '1.5rem';
+            track.style.padding = isDesktop ? '1.5rem 0' : '1rem 0';
+            return; // No nav/indicators in grid mode
         }
 
         // Add navigation (desktop/tablet slider)
